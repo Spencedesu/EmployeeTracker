@@ -4,24 +4,26 @@ CREATE DATABASE employee_db;
 
 USE employee_db;
 
-CREATE TABLE departments(
-  id INT NOT NULL AUTO_INCREMENT,
-  name VARCHAR(30),
-  PRIMARY KEY (id)
+CREATE TABLE Department (
+	ID INT NOT NULL AUTO_INCREMENT,
+	Name VARCHAR(100),
+	PRIMARY KEY(ID)
 );
-
-CREATE TABLE role(
-  id INT NOT NULL AUTO_INCREMENT,
-  title VARCHAR(30),
-  salary DECIMAL(10, 4),
-  department_id INT,
-  PRIMARY KEY (id)
+CREATE TABLE Roles(
+	ID INT NOT NULL AUTO_INCREMENT,
+	Title VARCHAR(100),
+	Salary INT,
+	Department_ID INT NOT NULL,
+	PRIMARY KEY(ID),
+	CONSTRAINT fk_department FOREIGN KEY (Department_ID) REFERENCES Department(ID)
 );
-
-CREATE TABLE employee (
-  id INT NOT NULL AUTO_INCREMENT,
-  first_name VARCHAR(30),
-  last_name VARCHAR(30),
-  role_id INT,
-  manager_id INT
-)
+CREATE TABLE Employees (
+	ID	INT NOT NULL AUTO_INCREMENT,
+	First_name VARCHAR(100),
+	Last_name VARCHAR(100),
+  Role_ID	INT NOT NULL AUTO_INCREMENT,
+	Manager_ID INT NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (ID),
+	CONSTRAINT fk_role FOREIGN KEY (Role_ID) REFERENCES Roles(ID),
+	CONSTRAINT fk_manager FOREIGN KEY (Manager_ID) REFERENCES Employees(ID)
+); 
