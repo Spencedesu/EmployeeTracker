@@ -4,26 +4,27 @@ CREATE DATABASE employee_db;
 
 USE employee_db;
 
-CREATE TABLE Department (
-	ID INT NOT NULL AUTO_INCREMENT,
-	Name VARCHAR(100),
-	PRIMARY KEY(ID)
+
+CREATE TABLE department (
+	id INT NOT NULL AUTO_INCREMENT,
+ name VARCHAR(100),
+	PRIMARY KEY(id)
 );
-CREATE TABLE Roles(
-	ID INT NOT NULL AUTO_INCREMENT,
-	Title VARCHAR(100),
-	Salary INT,
-	Department_ID INT NOT NULL,
-	PRIMARY KEY(ID),
-	CONSTRAINT fk_department FOREIGN KEY (Department_ID) REFERENCES Department(ID)
+CREATE TABLE roles(
+	id INT NOT NULL AUTO_INCREMENT,
+	title VARCHAR(100),
+	salary INT,
+	department_id INT NOT NULL,
+	PRIMARY KEY(id),
+	CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id)
 );
-CREATE TABLE Employees (
-	ID	INT NOT NULL AUTO_INCREMENT,
-	First_name VARCHAR(100),
-	Last_name VARCHAR(100),
-  Role_ID	INT NOT NULL AUTO_INCREMENT,
-	Manager_ID INT NOT NULL AUTO_INCREMENT,
-	PRIMARY KEY (ID),
-	CONSTRAINT fk_role FOREIGN KEY (Role_ID) REFERENCES Roles(ID),
-	CONSTRAINT fk_manager FOREIGN KEY (Manager_ID) REFERENCES Employees(ID)
+CREATE TABLE employees (
+	id	INT NOT NULL AUTO_INCREMENT,
+	first_name VARCHAR(100),
+	last_name VARCHAR(100),
+  role_ID	INT NOT NULL,
+	manager_ID INT NOT NULL,
+	PRIMARY KEY (id),
+	CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id),
+	CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employees(id)
 ); 
