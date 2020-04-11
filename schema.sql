@@ -29,6 +29,6 @@ CREATE TABLE employees (
 	
 ); 
 
-ALTER TABLE employees ADD CONSTRAINT FK_roleid FOREIGN KEY (role_id) REFERENCES role(id);
-ALTER TABLE employees ADD	CONSTRAINT FK_employeesid FOREIGN KEY (manager_id) REFERENCES employees(id);
-ALTER TABLE role ADD CONSTRAINT FK_departmentid FOREIGN KEY (department_id) REFERENCES department(id)
+-- ALTER TABLE employees ADD CONSTRAINT FK_roleid FOREIGN KEY (role_id) REFERENCES role(id);
+-- ALTER TABLE employees ADD	CONSTRAINT FK_employeesid FOREIGN KEY (manager_id) REFERENCES employees(id);
+-- ALTER TABLE role ADD CONSTRAINT FK_departmentid FOREIGN KEY (department_id) REFERENCES department(id)

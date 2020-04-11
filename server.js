@@ -43,8 +43,16 @@ connection.connect(function(err) {
       }  
     });
   }
+
   const ShowEmployees = () => {
-    var query = "SELECT * FROM employee"
+    var query = "SELECT * FROM employees";
+    connection.query(query, function(err, res) {
+      if(err)
+      return err;
+      console.log("\n");
+      console.table(res);
+      start();
+    })
   }
 
 function addFunction() {
