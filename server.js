@@ -1,54 +1,51 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
+const showBanner = require('node-banner');
+const Information = require("./Information")
 
 const connection = mysql.createConnection({
   port: 3306,
-  
   user: "root",
-
   password: "Fall2019",
   database: "employee_db"
-})
-
-const showBanner = require('node-banner');
- 
-(async () => {
-    await showBanner('EMPLOYEE APP', 'For viewing, updating & swapping around roles');
-})();
- 
+});
+  //BANNER 
+  (async () => {
+    await showBanner('JoJos \nEmployee \n APP', 'For viewing, updating & swapping around roles');
+  })();
 
 // connect to the mysql server and sql database
+
 connection.connect(function(err) {
   if (err) throw err;
-
-  
-  // run the start function after the connection is made to prompt the user
-  start();
+  console.log("Oh Hi there!")
+  start(); // AND START!!
 });
 
-function start() {
+ start = () => {
   inquirer
     .prompt({
       name: "Employees",
-      type: "list",
-      message: "Would you like to [Add], [View], or [Update] an employee role?",
-      choices: ["Add Employee", "View", "Update"]
+      type: "rawlist",
+      message: "Would you like to ...?",
+      choices: ["Show Employee List", "Show Department List", "Show Roles List", "Add Employee", "Update Employee Role", "Sign off"]
     })
-    .then(function(answer) {
-      // based on their answer, either call the bid or the post functions
-      if (answer.Employees === "Add Employee") {
-        addFunction();
-      }
-      else if(answer.Employees === "View") {
-        viewFunction();
-      } else if(answer.Employees === "Update") {
-        updateFunction();
-      } else {
-        connection.end();
-      }
+    .then(answers => {
+      switch (answers.action) {
+        case "Show Employee List":
+          ShowEmployees();
+          break;
+        case "Show Department List":
+          showAllEmployees();
+          case "Sign off":
+            signOff();
+      }  
     });
-}
+  }
+  const ShowEmployees = () => {
+    var query = "SELECT * FROM employee"
+  }
 
 function addFunction() {
   inquirer
@@ -92,14 +89,14 @@ function addFunction() {
         }
       )
     })
-}
+};
 
-viewFunction() {
-  var query = "SELECT * FROM Employees";
-  connection.query(query, function(err, res) {
-    for (var i = 0; i < res.length; i++) {
-      console.log(res[i].ID + " | " + res[i].First_name + " | " + res[i].Last_name + " | ");
-    }
-    start();
-  });
-}
+// viewFunction() {
+//   var query = "SELECT * FROM Employees";
+//   connection.query(query, function(err, res) {
+//     for (var i = 0; i < res.length; i++) {
+//       console.log(res[i].ID + " | " + res[i].First_name + " | " + res[i].Last_name + " | ");
+//     }
+//     start();
+//   });
+// }
